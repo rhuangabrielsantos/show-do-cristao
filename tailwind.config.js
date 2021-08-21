@@ -4,7 +4,11 @@ module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false,
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        paper: "url('/src/assets/background.jpg')",
+      },
+    },
     colors: {
       transparent: 'transparent',
       current: 'currentColor',

@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer utilities {
+  .flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .flex-items-center {
+    display: flex;
+    align-items: center;
+  }
+
+  .question {
+    border-radius: 100px 40px 40px 100px;
+  }
+}
