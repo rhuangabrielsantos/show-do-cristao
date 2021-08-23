@@ -16,6 +16,7 @@ module.exports = {
     },
     fontFamily: {
       roboto: ['Roboto', 'ui-sans-serif', 'system-ui'],
+      acme: ['Acme', 'ui-sans-serif', 'system-ui'],
     },
   },
   variants: {

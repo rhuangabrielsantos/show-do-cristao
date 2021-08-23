@@ -1,3 +1,5 @@
+import '../styles/button.css';
+
 import React from 'react';
 
 interface ButtonProps {
@@ -7,9 +9,10 @@ interface ButtonProps {
 
 export default function Button({ action, bgColor }: ButtonProps) {
   return (
-    <button
-      className={`flex-center w-16 h-16 rounded-lg m-3 text-cullen font-roboto ${bgColor}`}>
-      {action}
+    <button className="pushable disable">
+      <span className="shadow"></span>
+      <span className={`edge ${bgColor}`}></span>
+      <span className={`front ${bgColor}`}>{action}</span>
     </button>
   );
 }
