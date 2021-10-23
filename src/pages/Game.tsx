@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import Audience from '../assets/audience.png';
 import CardsImage from '../assets/cards.png';
@@ -11,11 +11,17 @@ import Modal from '../components/Modal';
 import MoneyLevel from '../components/MoneyLevel';
 import Question from '../components/Question';
 import Reward from '../components/Reward';
+import UserContext from '../context/user';
 import { moneyLevels } from '../mocks/moneyLevels';
 
 export default function Game() {
-  const [open, setOpen] = useState(false);
+  const { state } = useContext(UserContext);
 
+  useEffect(() => {
+    console.log(state);
+  }, []);
+
+  const [open, setOpen] = useState(false);
   return (
     <>
       <div className="flex-center bg-paper w-screen h-screen">

@@ -1,10 +1,23 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import LogoImage from '../assets/logo.png';
 import Footer from '../components/Footer';
+import UserContext from '../context/user';
 
 export default function Home() {
+  const history = useHistory();
+
+  const [name, setName] = useState<string>('');
+
+  const { setState } = useContext(UserContext);
+
+  function handleSubmit() {
+    setState({ name });
+
+    history.push('/game');
+  }
+
   return (
     <div className="flex-center flex-col bg-paper w-screen h-screen">
       <img src={LogoImage} alt="logo" className="w-96" />
@@ -14,13 +27,15 @@ export default function Home() {
           className="bg-gray-100 appearance-none border-2 border-gray-100 shadow-md rounded-2xl w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
           placeholder="Insira seu nome"
           type="text"
-          value=""
+          onChange={(e) => setName(e.target.value)}
+          value={name}
         />
-        <Link
-          to="/game"
+        <button
+          type="button"
+          onClick={handleSubmit}
           className="flex-center bg-rose-600 text-cullen w-24 py-2 ml-3 font-roboto rounded-lg">
           Jogar
-        </Link>
+        </button>
       </div>
 
       <Footer />
