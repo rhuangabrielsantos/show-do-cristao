@@ -16,12 +16,12 @@ import { moneyLevels } from '../mocks/moneyLevels';
 
 export default function Game() {
   const { state } = useContext(UserContext);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     console.log(state);
   }, []);
 
-  const [open, setOpen] = useState(false);
   return (
     <>
       <div className="flex-center bg-paper w-screen h-screen">

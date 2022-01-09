@@ -2,6 +2,8 @@ import React, { createContext, useState } from 'react';
 
 type UserType = {
   name: string;
+  money: number;
+  notice: string;
 };
 
 type PropsUserContext = {
@@ -12,6 +14,8 @@ type PropsUserContext = {
 const DEFAULT_USER: PropsUserContext = {
   state: {
     name: '',
+    money: 1000,
+    notice: '',
   },
   setState: () => {},
 };

@@ -13,9 +13,9 @@ export default function Home() {
   const { setState } = useContext(UserContext);
 
   function handleSubmit() {
-    setState({ name });
+    setState({ name, notice: 'O jogo irá iniciar, prepare-se!', money: 1000 });
 
-    history.push('/game');
+    history.push('/notice');
   }
 
   return (
