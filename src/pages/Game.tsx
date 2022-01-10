@@ -1,12 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react';
+import Lottie from 'react-lottie';
 
+import timerAnimationData from '../assets/animations/timer.json';
 import Audience from '../assets/audience.png';
 import CardsImage from '../assets/cards.png';
 import CollegeStudentsImage from '../assets/college-students.png';
 import LogoImg from '../assets/logo.png';
 import SkipImage from '../assets/skip.png';
 import Button from '../components/Button';
-import Hourglass from '../components/Hourglass';
+import EndGameModal from '../components/EndGameModal';
 import Modal from '../components/Modal';
 import MoneyLevel from '../components/MoneyLevel';
 import Question from '../components/Question';
@@ -18,9 +20,34 @@ export default function Game() {
   const { state } = useContext(UserContext);
   const [open, setOpen] = useState(false);
 
+  const [timer, setTimer] = useState(3);
+  const [gameOver, setGameOver] = useState(false);
+
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: timerAnimationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
+
   useEffect(() => {
+    const interval = setInterval(() => {
+      if (timer > 0) {
+        setTimer(timer - 1);
+      } else {
+        setGameOver(true);
+        clearInterval(interval);
+      }
+    }, 1000);
+
     console.log(state);
-  }, []);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [timer]);
 
   return (
     <>
@@ -86,8 +113,16 @@ export default function Game() {
             </div>
           </section>
           <section className="flex-center mt-5">
-            <div className="m-5">
-              <Hourglass />
+            <div className="flex-center m-5 w-16">
+              <Lottie
+                options={defaultOptions}
+                height={50}
+                width={50}
+                isStopped={gameOver}
+                isPaused={false}
+                isClickToPauseDisabled={false}
+              />
+              <h1 className="text-indigo-400 text-xl text-center font-acme">{timer}s</h1>
             </div>
             <div className="flex-center">
               <Button action="Sim" bgColor="green" />
@@ -112,6 +147,8 @@ export default function Game() {
       <Modal open={open} setOpen={setOpen}>
         <h1>Hello World</h1>
       </Modal>
+
+      <EndGameModal open={gameOver} />
     </>
   );
 }
