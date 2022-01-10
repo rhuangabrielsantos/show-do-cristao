@@ -39,6 +39,10 @@ export default function Game() {
   const [C, setC] = useState(false);
   const [D, setD] = useState(false);
 
+  const [errorMoney, setErrorMoney] = useState('');
+  const [stopMoney, setStopMoney] = useState('');
+  const [winMoney, setWinMoney] = useState('');
+
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -126,14 +130,37 @@ export default function Game() {
 
   function handleEndGame() {
     setGameOver(true);
+    setState({
+      ...state,
+      moneyEarned: errorMoney,
+    });
   }
 
   function handleGiveUp() {
     setGiveUp(true);
+    setState({
+      ...state,
+      moneyEarned: stopMoney,
+    });
+  }
+
+  function handleMoneys() {
+    const userMoney = state.money;
+    const userMoneyIndex = moneyLevels.findIndex((money) => money.amount === userMoney);
+
+    setStopMoney(moneyLevels[userMoneyIndex]?.money);
+
+    const errorMoney = moneyLevels[userMoneyIndex + 1]?.money;
+    setErrorMoney(errorMoney || '0');
+
+    const winMoney = moneyLevels[userMoneyIndex - 1].money;
+    setWinMoney(winMoney);
   }
 
   useEffect(() => {
     setQuestions(getQuestion(state.level, state.questionsAnswered));
+
+    handleMoneys();
   }, []);
 
   useEffect(() => {
@@ -142,6 +169,10 @@ export default function Game() {
         setTimer(timer - 1);
       } else if (!correctAnswerState && !gameOver && !giveUp) {
         setTimeOut(true);
+        setState({
+          ...state,
+          moneyEarned: errorMoney,
+        });
         clearInterval(interval);
       }
     }, 1000);
@@ -251,9 +282,9 @@ export default function Game() {
               <Button action="Desistir" bgColor="red" onClick={handleGiveUp} />
             </div>
             <div className="flex-center">
-              <Reward amount={1} event="Errar" />
-              <Reward amount={2} event="Parar" />
-              <Reward amount={5} event="Acertar" />
+              <Reward amount={errorMoney} event="Errar" />
+              <Reward amount={stopMoney} event="Parar" />
+              <Reward amount={winMoney} event="Acertar" />
             </div>
           </section>
         </div>

@@ -3,6 +3,7 @@ import React, { createContext, useState } from 'react';
 type GameType = {
   name: string;
   money: number;
+  moneyEarned?: string;
 
   notice: string;
   level: string;

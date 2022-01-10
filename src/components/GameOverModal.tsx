@@ -1,10 +1,11 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { VscDebugRestart } from 'react-icons/vsc';
 import Lottie from 'react-lottie';
 import { useHistory } from 'react-router-dom';
 
 import errorAnimationData from '../assets/animations/error.json';
+import GameContext from '../context/game';
 
 interface ModalProps {
   open: boolean;
@@ -12,6 +13,7 @@ interface ModalProps {
 
 export default function GameOverModal({ open }: ModalProps) {
   const history = useHistory();
+  const { state } = useContext(GameContext);
 
   const defaultOptions = {
     loop: false,
@@ -65,7 +67,7 @@ export default function GameOverModal({ open }: ModalProps) {
                   className="absolute top-5 left-5"
                   title="Reiniciar jogo"
                   onClick={handleRedirect}>
-                  <VscDebugRestart className="w-5 h-5 text-rose-600" />
+                  <VscDebugRestart className="w-10 h-10 text-rose-600" />
                 </button>
 
                 <div className="flex-center flex-col">
@@ -78,7 +80,10 @@ export default function GameOverModal({ open }: ModalProps) {
                     isClickToPauseDisabled={true}
                   />
                   <h1 className="text-rose-600 text-xl text-center font-acme mt-9">
-                    Resposta errada, você perdeu!
+                    Resposta errada, você perdeu o jogo!
+                  </h1>
+                  <h1 className="text-rose-600 text-xl text-center font-acme">
+                    E ganhou um total de {state.moneyEarned} pontos!
                   </h1>
                 </div>
               </div>

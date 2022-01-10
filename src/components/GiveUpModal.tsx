@@ -1,10 +1,11 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 import { VscDebugRestart } from 'react-icons/vsc';
 import Lottie from 'react-lottie';
 import { useHistory } from 'react-router-dom';
 
 import happyAnimationData from '../assets/animations/happy.json';
+import GameContext from '../context/game';
 
 interface ModalProps {
   open: boolean;
@@ -12,6 +13,7 @@ interface ModalProps {
 
 export default function GiveUpModal({ open }: ModalProps) {
   const history = useHistory();
+  const { state } = useContext(GameContext);
 
   const defaultOptions = {
     loop: true,
@@ -65,7 +67,7 @@ export default function GiveUpModal({ open }: ModalProps) {
                   className="absolute top-5 left-5"
                   title="Feche o Modal"
                   onClick={handleRedirect}>
-                  <VscDebugRestart className="w-5 h-5 text-amber-400" />
+                  <VscDebugRestart className="w-10 h-10 text-amber-400" />
                 </button>
 
                 <div className="flex-center flex-col">
@@ -79,6 +81,9 @@ export default function GiveUpModal({ open }: ModalProps) {
                   />
                   <h1 className="text-amber-400 text-xl text-center font-acme">
                     Você desistiu do jogo!
+                  </h1>
+                  <h1 className="text-amber-400 text-xl text-center font-acme">
+                    E ganhou um total de {state.moneyEarned} pontos!
                   </h1>
                 </div>
               </div>
