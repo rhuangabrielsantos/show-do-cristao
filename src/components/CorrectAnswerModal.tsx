@@ -1,30 +1,47 @@
 import { Dialog, Transition } from '@headlessui/react';
-import { Fragment } from 'react';
-import { AiFillCloseCircle } from 'react-icons/ai';
+import { Fragment, useEffect } from 'react';
 import Lottie from 'react-lottie';
 import { useHistory } from 'react-router-dom';
 
-import sadAnimationData from '../assets/animations/sad.json';
+import loadingAnimationData from '../assets/animations/loading.json';
+import successAnimationData from '../assets/animations/success.json';
 
 interface ModalProps {
   open: boolean;
 }
 
-export default function EndGameModal({ open }: ModalProps) {
+export default function CorrectAnswerModal({ open }: ModalProps) {
   const history = useHistory();
 
   const defaultOptions = {
+    loop: false,
+    autoplay: true,
+    animationData: successAnimationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
+
+  const loadingOptions = {
     loop: true,
     autoplay: true,
-    animationData: sadAnimationData,
+    animationData: loadingAnimationData,
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
 
   function handleRedirect() {
-    history.push('/');
+    history.push('/notice');
   }
+
+  useEffect(() => {
+    if (open) {
+      setTimeout(() => {
+        handleRedirect();
+      }, 5000);
+    }
+  }, [open]);
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -32,7 +49,7 @@ export default function EndGameModal({ open }: ModalProps) {
         as="div"
         auto-reopen="true"
         className="fixed z-10 inset-0 overflow-y-auto"
-        onClose={handleRedirect}>
+        onClose={() => {}}>
         <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
           <Transition.Child
             as={Fragment}
@@ -60,25 +77,27 @@ export default function EndGameModal({ open }: ModalProps) {
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
             <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all h-96 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
               <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 flex-center w-full h-full">
-                <button
-                  type="button"
-                  className="absolute top-5 right-5"
-                  title="Feche o Modal"
-                  onClick={handleRedirect}>
-                  <AiFillCloseCircle className="w-5 h-5" />
-                </button>
-
+                <div className="absolute top-5 right-5">
+                  <Lottie
+                    options={loadingOptions}
+                    height={50}
+                    width={50}
+                    isStopped={false}
+                    isPaused={false}
+                    isClickToPauseDisabled={true}
+                  />
+                </div>
                 <div className="flex-center flex-col">
                   <Lottie
                     options={defaultOptions}
-                    height={200}
-                    width={200}
+                    height={230}
+                    width={230}
                     isStopped={false}
                     isPaused={false}
-                    isClickToPauseDisabled={false}
+                    isClickToPauseDisabled={true}
                   />
                   <h1 className="text-indigo-400 text-xl text-center font-acme">
-                    Tempo esgotado, você perdeu!
+                    Resposta certa, parabéns!
                   </h1>
                 </div>
               </div>

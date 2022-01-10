@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { UserContextProvider } from './user';
+import { GameContextProvider } from './game';
 
 const GlobalContextProvider: React.FC = ({ children }) => {
-  return <UserContextProvider>{children}</UserContextProvider>;
+  return <GameContextProvider>{children}</GameContextProvider>;
 };
 
 export default GlobalContextProvider;

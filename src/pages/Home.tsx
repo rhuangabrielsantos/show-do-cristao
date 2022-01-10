@@ -3,17 +3,23 @@ import { useHistory } from 'react-router-dom';
 
 import LogoImage from '../assets/logo.png';
 import Footer from '../components/Footer';
-import UserContext from '../context/user';
+import GameContext from '../context/game';
 
 export default function Home() {
   const history = useHistory();
 
   const [name, setName] = useState<string>('');
 
-  const { setState } = useContext(UserContext);
+  const { setState } = useContext(GameContext);
 
   function handleSubmit() {
-    setState({ name, notice: 'O jogo irá iniciar, prepare-se!', money: 1000 });
+    setState({
+      name,
+      notice: 'O jogo irá iniciar, prepare-se!',
+      money: 1000,
+      level: 'easy',
+      questionsAnswered: [],
+    });
 
     history.push('/notice');
   }

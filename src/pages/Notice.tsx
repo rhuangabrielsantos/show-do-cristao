@@ -5,11 +5,11 @@ import { useHistory } from 'react-router-dom';
 import loadingAnimationData from '../assets/animations/loading.json';
 import thinkingAnimationData from '../assets/animations/thinking.json';
 import Footer from '../components/Footer';
-import UserContext from '../context/user';
+import GameContext from '../context/game';
 
 export default function Home() {
   const history = useHistory();
-  const { state } = useContext(UserContext);
+  const { state } = useContext(GameContext);
 
   const defaultOptions = {
     loop: true,
@@ -52,7 +52,7 @@ export default function Home() {
           width={400}
           isStopped={false}
           isPaused={false}
-          isClickToPauseDisabled={false}
+          isClickToPauseDisabled={true}
         />
         <div className="flex-center">
           <Lottie
@@ -61,7 +61,7 @@ export default function Home() {
             width={100}
             isStopped={false}
             isPaused={false}
-            isClickToPauseDisabled={false}
+            isClickToPauseDisabled={true}
           />
           <h1 className="text-warmGray-800 text-3xl text-center font-acme uppercase">
             {state.notice}

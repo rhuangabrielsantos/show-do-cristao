@@ -2,7 +2,6 @@
   position: relative;
   border: none;
   background: transparent;
-  padding: 0;
   cursor: pointer;
   outline-offset: 4px;
   transition: filter 250ms;
@@ -52,7 +51,7 @@
 .front {
   display: block;
   position: relative;
-  padding: 10px;
+  padding: 10px 15px;
   border-radius: 12px;
   font-family: Acme, sans-serif;
   font-size: 2rem;
