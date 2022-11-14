@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from 'react';
-import Lottie from 'react-lottie';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useEffect } from "react";
+import Lottie from "react-lottie";
+import { useHistory } from "react-router-dom";
 
-import loadingAnimationData from '../assets/animations/loading.json';
-import thinkingAnimationData from '../assets/animations/thinking.json';
-import Footer from '../components/Footer';
-import GameContext from '../context/game';
+import loadingAnimationData from "../assets/animations/loading.json";
+import thinkingAnimationData from "../assets/animations/thinking.json";
+import Footer from "../components/Footer";
+import GameContext from "../context/game";
 
 export default function Home() {
   const history = useHistory();
@@ -16,7 +16,7 @@ export default function Home() {
     autoplay: true,
     animationData: thinkingAnimationData,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
+      preserveAspectRatio: "xMidYMid slice",
     },
   };
 
@@ -25,17 +25,17 @@ export default function Home() {
     autoplay: true,
     animationData: loadingAnimationData,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
+      preserveAspectRatio: "xMidYMid slice",
     },
   };
 
   function handleGame() {
-    history.push('/game');
+    history.push("/game");
   }
 
   useEffect(() => {
     if (!state.name) {
-      history.push('/');
+      history.push("/");
     }
 
     setTimeout(() => {

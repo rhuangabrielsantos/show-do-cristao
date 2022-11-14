@@ -31,11 +31,23 @@
 }
 
 .edge.green {
-  background: linear-gradient(to left, #0f5132 0%, #105a38 8%, #105a38 92%, #0f5132 100%);
+  background: linear-gradient(
+    to left,
+    #0f5132 0%,
+    #105a38 8%,
+    #105a38 92%,
+    #0f5132 100%
+  );
 }
 
 .edge.yellow {
-  background: linear-gradient(to left, #a2a505 0%, #afc204 8%, #afc204 92%, #a2a505 100%);
+  background: linear-gradient(
+    to left,
+    #a2a505 0%,
+    #afc204 8%,
+    #afc204 92%,
+    #a2a505 100%
+  );
 }
 
 .edge.red {

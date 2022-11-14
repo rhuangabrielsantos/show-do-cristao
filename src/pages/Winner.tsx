@@ -1,10 +1,11 @@
-import { VscDebugRestart } from 'react-icons/vsc';
-import Lottie from 'react-lottie';
-import { useHistory } from 'react-router-dom';
+import React from "react";
+import { VscDebugRestart } from "react-icons/vsc";
+import Lottie from "react-lottie";
+import { useHistory } from "react-router-dom";
 
-import fireworksAnimationData from '../assets/animations/fireworks.json';
-import logoImage from '../assets/logo.png';
-import Footer from '../components/Footer';
+import fireworksAnimationData from "../assets/animations/fireworks.json";
+import logoImage from "../assets/logo.png";
+import Footer from "../components/Footer";
 
 export default function Winner() {
   const history = useHistory();
@@ -14,7 +15,7 @@ export default function Winner() {
     autoplay: true,
     animationData: fireworksAnimationData,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
+      preserveAspectRatio: "xMidYMid slice",
     },
   };
 
@@ -32,7 +33,7 @@ export default function Winner() {
       </div>
       <VscDebugRestart
         className="absolute top-5 left-5 text-indigo-400 w-9 h-9 cursor-pointer"
-        onClick={() => history.push('/')}
+        onClick={() => history.push("/")}
       />
       <img src={logoImage} alt="Logo" className="w-96 z-10" />
       <h1 className="text-indigo-400 text-5xl text-center font-acme absolute bottom-10 flex-center">

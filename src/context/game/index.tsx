@@ -1,4 +1,4 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState } from "react";
 
 type GameType = {
   name: string;
@@ -9,7 +9,7 @@ type GameType = {
   level: string;
   questionsAnswered: number[];
 
-  skips: number
+  skips: number;
 };
 
 type PropsGameContext = {
@@ -17,16 +17,20 @@ type PropsGameContext = {
   setState: React.Dispatch<React.SetStateAction<GameType>>;
 };
 
+const setStateInitial = () => {
+  return;
+};
+
 const DEFAULT_GAME: PropsGameContext = {
   state: {
-    name: '',
+    name: "",
     money: 1000,
-    notice: '',
-    level: '',
+    notice: "",
+    level: "",
     questionsAnswered: [],
-    skips: 0
+    skips: 0,
   },
-  setState: () => {},
+  setState: () => setStateInitial,
 };
 
 const GameContext = createContext<PropsGameContext>(DEFAULT_GAME);
@@ -35,7 +39,9 @@ const GameContextProvider: React.FC = ({ children }) => {
   const [state, setState] = useState<GameType>(DEFAULT_GAME.state);
 
   return (
-    <GameContext.Provider value={{ state, setState }}>{children}</GameContext.Provider>
+    <GameContext.Provider value={{ state, setState }}>
+      {children}
+    </GameContext.Provider>
   );
 };
 

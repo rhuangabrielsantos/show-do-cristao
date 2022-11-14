@@ -1,12 +1,13 @@
-import { BrowserRouter, Route } from 'react-router-dom';
-import { ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import React from "react";
+import { BrowserRouter, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-import GlobalContextProvider from './context';
-import Game from './pages/Game';
-import Home from './pages/Home';
-import Notice from './pages/Notice';
-import Winner from './pages/Winner';
+import GlobalContextProvider from "./context";
+import Game from "./pages/Game";
+import Home from "./pages/Home";
+import Notice from "./pages/Notice";
+import Winner from "./pages/Winner";
 
 function App() {
   return (
@@ -18,7 +19,8 @@ function App() {
         <Route path="/winner" component={Winner} />
       </BrowserRouter>
 
-      <ToastContainer position="top-right"
+      <ToastContainer
+        position="top-right"
         autoClose={5000}
         hideProgressBar={false}
         newestOnTop={false}

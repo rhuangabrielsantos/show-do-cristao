@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-import MoneyImage from '../assets/money.png';
+import MoneyImage from "../assets/money.png";
 
 interface RewardProps {
   amount: string;

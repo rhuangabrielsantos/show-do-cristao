@@ -1,5 +1,5 @@
-import React from 'react';
-import { FaCodepen, FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
+import React from "react";
+import { FaCodepen, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 function Footer() {
   return (
@@ -9,28 +9,32 @@ function Footer() {
           href="https://github.com/rhuangabrielsantos"
           title="Github"
           target="_blanked"
-          className="no-underline text-gray-400 text-3xl mx-2 my-0 hover:text-gray-600 duration-300">
+          className="no-underline text-gray-400 text-3xl mx-2 my-0 hover:text-gray-600 duration-300"
+        >
           <FaGithub />
         </a>
         <a
           href="https://www.linkedin.com/in/rhuangabrielsantos/"
           title="Linkedin"
           target="_blanked"
-          className="no-underline text-gray-400 text-3xl mx-2 my-0 hover:text-gray-600 duration-300">
+          className="no-underline text-gray-400 text-3xl mx-2 my-0 hover:text-gray-600 duration-300"
+        >
           <FaLinkedin />
         </a>
         <a
           href="https://twitter.com/rhuangs_"
           title="Twitter"
           target="_blanked"
-          className="no-underline text-gray-400 text-3xl mx-2 my-0 hover:text-gray-600 duration-300">
+          className="no-underline text-gray-400 text-3xl mx-2 my-0 hover:text-gray-600 duration-300"
+        >
           <FaTwitter />
         </a>
         <a
           href="https://codepen.io/rhuangabrielsantos"
           title="Codepen"
           target="_blanked"
-          className="no-underline text-gray-400 text-3xl mx-2 my-0 hover:text-gray-600 duration-300">
+          className="no-underline text-gray-400 text-3xl mx-2 my-0 hover:text-gray-600 duration-300"
+        >
           <FaCodepen />
         </a>
       </div>

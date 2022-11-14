@@ -1,6 +1,6 @@
-import '../styles/button.css';
+import React from "react";
 
-import React from 'react';
+import "../styles/button.css";
 
 interface ButtonProps {
   action: string;
