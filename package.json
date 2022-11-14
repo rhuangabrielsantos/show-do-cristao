@@ -1,67 +1,33 @@
 {
   "name": "show-do-cristao",
-  "version": "0.1.0",
   "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
   "dependencies": {
-    "@craco/craco": "^6.2.0",
     "@headlessui/react": "^1.4.0",
     "@tailwindcss/forms": "^0.3.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-lottie": "^1.2.3",
-    "react-router-dom": "^5.2.0",
-    "react-scripts": "4.0.3",
-    "typescript": "^4.1.2"
-  },
-  "scripts": {
-    "start": "craco start",
-    "build": "craco build",
-    "test": "craco test",
-    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
-    "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,css,md,json}\" ",
-    "lint": "yarn lint:format && yarn lint:fix"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "react-router-dom": "^5.2.0"
   },
   "devDependencies": {
-    "@types/node": "^16.4.13",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-lottie": "^1.2.6",
     "@types/react-router-dom": "^5.1.8",
-    "@typescript-eslint/eslint-plugin": "^4.17.0",
-    "@typescript-eslint/parser": "^4.17.0",
+    "@vitejs/plugin-react": "^2.2.0",
     "autoprefixer": "^9",
-    "eslint": "^7.22.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.3.1",
-    "eslint-plugin-react": "^7.22.0",
-    "eslint-plugin-simple-import-sort": "^7.0.0",
     "postcss": "^7",
-    "pre-commit": "^1.2.2",
-    "prettier": "^2.2.1",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat",
     "tailwind-dracula": "^1.0.5",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat"
-  },
-  "pre-commit": "lint",
-  "license": "MIT"
+    "typescript": "^4.6.4",
+    "vite": "^3.2.3"
+  }
 }

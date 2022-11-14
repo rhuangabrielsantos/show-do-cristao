@@ -1,8 +1,13 @@
 const colors = require('tailwindcss/colors');
 
+/** @type {import('tailwindcss').Config} */
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: false,
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
   theme: {
     extend: {
       backgroundImage: {
@@ -19,8 +24,5 @@ module.exports = {
       acme: ['Acme', 'ui-sans-serif', 'system-ui'],
     },
   },
-  variants: {
-    extend: {},
-  },
   plugins: [require('@tailwindcss/forms'), require('tailwind-dracula')()],
-};
+}
