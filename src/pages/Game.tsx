@@ -1,36 +1,36 @@
-import React, { useContext, useEffect, useState } from 'react';
-import Lottie from 'react-lottie';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from "react";
+import Lottie from "react-lottie";
+import { useHistory } from "react-router-dom";
 
-import timerAnimationData from '../assets/animations/timer.json';
-import Audience from '../assets/audience.png';
-import CardsImage from '../assets/cards.png';
-import CollegeStudentsImage from '../assets/college-students.png';
-import LogoImg from '../assets/logo.png';
-import SkipImage from '../assets/skip.png';
-import Button from '../components/Button';
-import CorrectAnswerModal from '../components/CorrectAnswerModal';
-import GameOverModal from '../components/GameOverModal';
-import GiveUpModal from '../components/GiveUpModal';
-import Modal from '../components/Modal';
-import MoneyLevel from '../components/MoneyLevel';
-import Question from '../components/Question';
-import Reward from '../components/Reward';
-import TimeoutModal from '../components/TimeoutModal';
-import GameContext from '../context/game';
-import { moneyLevels } from '../data/moneyLevels';
-import { Question as QuestionInterface } from '../interfaces/Question';
-import { getQuestion, handleNextMoney } from '../services/GameService';
+import timerAnimationData from "../assets/animations/timer.json";
+import Audience from "../assets/audience.png";
+import CardsImage from "../assets/cards.png";
+import CollegeStudentsImage from "../assets/college-students.png";
+import LogoImg from "../assets/logo.png";
+import Button from "../components/Button";
+import CorrectAnswerModal from "../components/CorrectAnswerModal";
+import GameOverModal from "../components/GameOverModal";
+import GiveUpModal from "../components/GiveUpModal";
+import MoneyLevel from "../components/MoneyLevel";
+import Question from "../components/Question";
+import Reward from "../components/Reward";
+import { SkipButton } from "../components/SkipButton";
+import SkipModal from "../components/SkipModal";
+import TimeoutModal from "../components/TimeoutModal";
+import GameContext from "../context/game";
+import { moneyLevels } from "../data/moneyLevels";
+import { Question as QuestionInterface } from "../interfaces/Question";
+import { getQuestion, handleNextMoney } from "../services/GameService";
 
 export default function Game() {
   const history = useHistory();
   const { state, setState } = useContext(GameContext);
-  const [open, setOpen] = useState(false);
 
   const [timeOut, setTimeOut] = useState(false);
   const [correctAnswerState, setCorrectAnswerState] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [giveUp, setGiveUp] = useState(false);
+  const [skipState, setSkipState] = useState(false);
 
   const [timer, setTimer] = useState(30);
   const [question, setQuestions] = useState<QuestionInterface | null>(null);
@@ -39,40 +39,40 @@ export default function Game() {
   const [C, setC] = useState(false);
   const [D, setD] = useState(false);
 
-  const [errorMoney, setErrorMoney] = useState('');
-  const [stopMoney, setStopMoney] = useState('');
-  const [winMoney, setWinMoney] = useState('');
+  const [errorMoney, setErrorMoney] = useState("");
+  const [stopMoney, setStopMoney] = useState("");
+  const [winMoney, setWinMoney] = useState("");
 
   const defaultOptions = {
     loop: true,
     autoplay: true,
     animationData: timerAnimationData,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
+      preserveAspectRatio: "xMidYMid slice",
     },
   };
 
   function handleAlternative(alternative: string) {
     switch (alternative) {
-      case 'A':
+      case "A":
         setA(true);
         setB(false);
         setC(false);
         setD(false);
         break;
-      case 'B':
+      case "B":
         setA(false);
         setB(true);
         setC(false);
         setD(false);
         break;
-      case 'C':
+      case "C":
         setA(false);
         setB(false);
         setC(true);
         setD(false);
         break;
-      case 'D':
+      case "D":
         setA(false);
         setB(false);
         setC(false);
@@ -87,7 +87,7 @@ export default function Game() {
     const correctAnswer = question?.answer;
     const response = handleCorrectAnswer(correctAnswer);
 
-    if (response === 'correct') {
+    if (response === "correct") {
       handleNextQuestion();
       return;
     }
@@ -97,16 +97,16 @@ export default function Game() {
 
   function handleCorrectAnswer(correctAnswer: string | undefined) {
     switch (correctAnswer) {
-      case 'A':
-        return A ? 'correct' : 'wrong';
-      case 'B':
-        return B ? 'correct' : 'wrong';
-      case 'C':
-        return C ? 'correct' : 'wrong';
-      case 'D':
-        return D ? 'correct' : 'wrong';
+      case "A":
+        return A ? "correct" : "wrong";
+      case "B":
+        return B ? "correct" : "wrong";
+      case "C":
+        return C ? "correct" : "wrong";
+      case "D":
+        return D ? "correct" : "wrong";
       default:
-        return 'wrong';
+        return "wrong";
     }
   }
 
@@ -114,7 +114,7 @@ export default function Game() {
     const nextMoney = handleNextMoney(state.money);
 
     if (!nextMoney) {
-      history.push('/winner');
+      history.push("/winner");
       return;
     }
 
@@ -146,15 +146,35 @@ export default function Game() {
 
   function handleMoneys() {
     const userMoney = state.money;
-    const userMoneyIndex = moneyLevels.findIndex((money) => money.amount === userMoney);
+    const userMoneyIndex = moneyLevels.findIndex(
+      (money) => money.amount === userMoney
+    );
 
     setStopMoney(moneyLevels[userMoneyIndex]?.money);
 
     const errorMoney = moneyLevels[userMoneyIndex + 1]?.money;
-    setErrorMoney(errorMoney || '0');
+    setErrorMoney(errorMoney || "0");
 
     const winMoney = moneyLevels[userMoneyIndex - 1].money;
     setWinMoney(winMoney);
+  }
+
+  function handleSkip() {
+    if (state.skips === 3) return;
+
+    setGameOver(true);
+
+    const formattedMoney = moneyLevels.find(
+      (money) => money.amount === state.money
+    )?.money;
+
+    setState({
+      ...state,
+      notice: `Vamos para uma nova pergunta valendo ${formattedMoney} pontos!`,
+      skips: state.skips + 1,
+    });
+
+    setSkipState(true);
   }
 
   useEffect(() => {
@@ -198,32 +218,32 @@ export default function Game() {
             <div className="flex-center flex-col">
               <Question
                 alternative="A"
-                answer={question?.options[0] || ''}
+                answer={question?.options[0] || ""}
                 selected={A}
-                onClick={() => handleAlternative('A')}
+                onClick={() => handleAlternative("A")}
               />
               <Question
                 alternative="B"
-                answer={question?.options[1] || ''}
+                answer={question?.options[1] || ""}
                 selected={B}
-                onClick={() => handleAlternative('B')}
+                onClick={() => handleAlternative("B")}
               />
               <Question
                 alternative="C"
-                answer={question?.options[2] || ''}
+                answer={question?.options[2] || ""}
                 selected={C}
-                onClick={() => handleAlternative('C')}
+                onClick={() => handleAlternative("C")}
               />
               <Question
                 alternative="D"
-                answer={question?.options[3] || ''}
+                answer={question?.options[3] || ""}
                 selected={D}
-                onClick={() => handleAlternative('D')}
+                onClick={() => handleAlternative("D")}
               />
             </div>
             <div className="flex-center ml-6 bg-rose-400 rounded-md w-72 h-56">
               <div className="grid grid-cols-3 grid-rows-2 gap-3">
-                <button onClick={() => setOpen(true)}>
+                <button>
                   <img
                     src={CardsImage}
                     alt="cards"
@@ -247,21 +267,21 @@ export default function Game() {
                     title="Pedir ajuda do auditório"
                   />
                 </button>
-                <button>
-                  <div className="flex-center bg-amber-100 w-20 h-20 rounded-md">
-                    <img src={SkipImage} alt="skip" className="w-14 h-14" title="Pular" />
-                  </div>
-                </button>
-                <button>
-                  <div className="flex-center bg-rose-200 w-20 h-20 rounded-md">
-                    <img src={SkipImage} alt="skip" className="w-14 h-14" title="Pular" />
-                  </div>
-                </button>
-                <button>
-                  <div className="flex-center bg-violet-300 w-20 h-20 rounded-md">
-                    <img src={SkipImage} alt="skip" className="w-14 h-14" title="Pular" />
-                  </div>
-                </button>
+
+                <SkipButton
+                  disabled={state.skips <= 0}
+                  handleSkip={handleSkip}
+                />
+
+                <SkipButton
+                  disabled={state.skips <= 1}
+                  handleSkip={handleSkip}
+                />
+
+                <SkipButton
+                  disabled={state.skips <= 2}
+                  handleSkip={handleSkip}
+                />
               </div>
             </div>
           </section>
@@ -275,10 +295,16 @@ export default function Game() {
                 isPaused={false}
                 isClickToPauseDisabled={true}
               />
-              <h1 className="text-indigo-400 text-xl text-center font-acme">{timer}s</h1>
+              <h1 className="text-indigo-400 text-xl text-center font-acme">
+                {timer}s
+              </h1>
             </div>
             <div className="flex-center">
-              <Button action="Confirmar" bgColor="green" onClick={handleAnswer} />
+              <Button
+                action="Confirmar"
+                bgColor="green"
+                onClick={handleAnswer}
+              />
               <Button action="Desistir" bgColor="red" onClick={handleGiveUp} />
             </div>
             <div className="flex-center">
@@ -300,14 +326,11 @@ export default function Game() {
         </div>
       </div>
 
-      <Modal open={open} setOpen={setOpen}>
-        <h1>Hello World</h1>
-      </Modal>
-
       <TimeoutModal open={timeOut} />
       <GameOverModal open={gameOver} />
       <CorrectAnswerModal open={correctAnswerState} />
       <GiveUpModal open={giveUp} />
+      <SkipModal open={skipState} />
     </>
   );
 }

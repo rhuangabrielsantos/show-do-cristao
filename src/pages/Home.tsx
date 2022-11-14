@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import LogoImage from '../assets/logo.png';
 import Footer from '../components/Footer';
@@ -13,12 +14,18 @@ export default function Home() {
   const { setState } = useContext(GameContext);
 
   function handleSubmit() {
+    if (!name) {
+      toast('Insira seu nome ou o nome de sua equipe');
+      return;
+    };
+
     setState({
       name,
       notice: 'O jogo irá iniciar, prepare-se!',
       money: 1000,
       level: 'easy',
       questionsAnswered: [],
+      skips: 0
     });
 
     history.push('/notice');
@@ -31,7 +38,7 @@ export default function Home() {
       <div className="flex-center mt-10">
         <input
           className="bg-gray-100 appearance-none border-2 border-gray-100 shadow-md rounded-2xl w-96 py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-          placeholder="Insira seu nome"
+          placeholder="Insira seu nome ou o nome de sua equipe"
           type="text"
           onChange={(e) => setName(e.target.value)}
           value={name}

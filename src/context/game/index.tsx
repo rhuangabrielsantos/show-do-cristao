@@ -8,6 +8,8 @@ type GameType = {
   notice: string;
   level: string;
   questionsAnswered: number[];
+
+  skips: number
 };
 
 type PropsGameContext = {
@@ -22,6 +24,7 @@ const DEFAULT_GAME: PropsGameContext = {
     notice: '',
     level: '',
     questionsAnswered: [],
+    skips: 0
   },
   setState: () => {},
 };
