@@ -26,6 +26,9 @@ export default function Home() {
       level: "easy",
       questionsAnswered: [],
       skips: 0,
+      helps: {
+        audience: true,
+      },
     });
 
     history.push("/notice");

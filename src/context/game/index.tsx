@@ -10,6 +10,11 @@ type GameType = {
   questionsAnswered: number[];
 
   skips: number;
+  helps: HelpsProps;
+};
+
+type HelpsProps = {
+  audience: boolean;
 };
 
 type PropsGameContext = {
@@ -29,6 +34,9 @@ const DEFAULT_GAME: PropsGameContext = {
     level: "",
     questionsAnswered: [],
     skips: 0,
+    helps: {
+      audience: true,
+    },
   },
   setState: () => setStateInitial,
 };

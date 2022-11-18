@@ -17,4 +17,12 @@
   .question {
     border-radius: 100px 40px 40px 100px;
   }
+
+  .w-ballon {
+    width: 165px;
+  }
+
+  .h-ballon {
+    height: 124px;
+  }
 }

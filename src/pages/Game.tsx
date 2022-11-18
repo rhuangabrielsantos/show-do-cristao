@@ -7,6 +7,7 @@ import Audience from "../assets/audience.png";
 import CardsImage from "../assets/cards.png";
 import CollegeStudentsImage from "../assets/college-students.png";
 import LogoImg from "../assets/logo.png";
+import AudienceHelpModal from "../components/AudienceHelpModal";
 import Button from "../components/Button";
 import CorrectAnswerModal from "../components/CorrectAnswerModal";
 import GameOverModal from "../components/GameOverModal";
@@ -31,6 +32,7 @@ export default function Game() {
   const [gameOver, setGameOver] = useState(false);
   const [giveUp, setGiveUp] = useState(false);
   const [skipState, setSkipState] = useState(false);
+  const [audienceHelp, setAudienceHelp] = useState(false);
 
   const [timer, setTimer] = useState(30);
   const [question, setQuestions] = useState<QuestionInterface | null>(null);
@@ -170,11 +172,26 @@ export default function Game() {
 
     setState({
       ...state,
+      questionsAnswered: [question?.id || 0, ...state.questionsAnswered],
       notice: `Vamos para uma nova pergunta valendo ${formattedMoney} pontos!`,
       skips: state.skips + 1,
     });
 
     setSkipState(true);
+  }
+
+  function handleAudienceHelp() {
+    if (!state.helps.audience) return false;
+
+    setAudienceHelp(true);
+
+    setState({
+      ...state,
+      helps: {
+        ...state.helps,
+        audience: false,
+      },
+    });
   }
 
   useEffect(() => {
@@ -186,7 +203,7 @@ export default function Game() {
   useEffect(() => {
     const interval = setInterval(() => {
       if (timer > 0 && !correctAnswerState && !gameOver && !giveUp) {
-        setTimer(timer - 1);
+        // setTimer(timer - 1);
       } else if (!correctAnswerState && !gameOver && !giveUp) {
         setTimeOut(true);
         setState({
@@ -259,28 +276,43 @@ export default function Game() {
                     title="Pedir ajuda aos universitários"
                   />
                 </button>
-                <button>
+                <button
+                  onClick={handleAudienceHelp}
+                  disabled={!state.helps.audience}
+                  className={
+                    !state.helps.audience
+                      ? "cursor-not-allowed filter grayscale"
+                      : undefined
+                  }
+                >
                   <img
                     src={Audience}
                     alt="audience"
                     className="w-20 h-20"
-                    title="Pedir ajuda do auditório"
+                    title={
+                      state.helps.audience
+                        ? "Pedir ajuda do auditório"
+                        : "Você já utilizou esta ajuda"
+                    }
                   />
                 </button>
 
                 <SkipButton
                   disabled={state.skips <= 0}
                   handleSkip={handleSkip}
+                  color="rose"
                 />
 
                 <SkipButton
                   disabled={state.skips <= 1}
                   handleSkip={handleSkip}
+                  color="fuchsia"
                 />
 
                 <SkipButton
                   disabled={state.skips <= 2}
                   handleSkip={handleSkip}
+                  color="purple"
                 />
               </div>
             </div>
@@ -331,6 +363,12 @@ export default function Game() {
       <CorrectAnswerModal open={correctAnswerState} />
       <GiveUpModal open={giveUp} />
       <SkipModal open={skipState} />
+
+      <AudienceHelpModal
+        open={audienceHelp}
+        onClose={() => setAudienceHelp(false)}
+        correctQuestion={question?.answer}
+      />
     </>
   );
 }
