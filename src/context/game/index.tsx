@@ -15,6 +15,7 @@ type GameType = {
 
 type HelpsProps = {
   audience: boolean;
+  seminarists: boolean;
 };
 
 type PropsGameContext = {
@@ -36,6 +37,7 @@ const DEFAULT_GAME: PropsGameContext = {
     skips: 0,
     helps: {
       audience: true,
+      seminarists: true,
     },
   },
   setState: () => setStateInitial,

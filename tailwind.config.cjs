@@ -14,6 +14,9 @@ module.exports = {
     colors: {
       transparent: "transparent",
       current: "currentColor",
+      isaque: "#FF4163",
+      emanuel: "#2D7CFA",
+      sara: "#224A85",
       ...colors,
     },
     fontFamily: {

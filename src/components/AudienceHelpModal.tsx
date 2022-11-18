@@ -37,19 +37,19 @@ export default function AudienceHelpModal({
   const generatePercent = () => {
     const one =
       correctQuestion === "A"
-        ? getRandomNumber(25, 45)
+        ? getRandomNumber(30, 50)
         : getRandomNumber(10, 20);
     const two =
       correctQuestion === "B"
-        ? getRandomNumber(25, 45)
+        ? getRandomNumber(30, 50)
         : getRandomNumber(10, 20);
     const three =
       correctQuestion === "C"
-        ? getRandomNumber(25, 45)
+        ? getRandomNumber(30, 50)
         : getRandomNumber(10, 20);
     const four =
       correctQuestion === "D"
-        ? getRandomNumber(25, 45)
+        ? getRandomNumber(30, 50)
         : getRandomNumber(10, 20);
 
     const total = one + two + three + four;
@@ -57,10 +57,30 @@ export default function AudienceHelpModal({
     const randomIndex = getRandomNumber(1, 4);
 
     setPercents({
-      one: randomIndex === 1 ? one + (100 - total) : one,
-      two: randomIndex === 2 ? two + (100 - total) : two,
-      three: randomIndex === 3 ? three + (100 - total) : three,
-      four: randomIndex === 4 ? four + (100 - total) : four,
+      one:
+        randomIndex === 1
+          ? total > 100
+            ? one - (total - 100)
+            : one + (100 - total)
+          : one,
+      two:
+        randomIndex === 2
+          ? total > 100
+            ? two - (total - 100)
+            : two + (100 - total)
+          : two,
+      three:
+        randomIndex === 3
+          ? total > 100
+            ? three - (total - 100)
+            : three + (100 - total)
+          : three,
+      four:
+        randomIndex === 4
+          ? total > 100
+            ? four - (total - 100)
+            : four + (100 - total)
+          : four,
     });
   };
 

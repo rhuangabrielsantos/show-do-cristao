@@ -28,6 +28,7 @@ export default function Home() {
       skips: 0,
       helps: {
         audience: true,
+        seminarists: true,
       },
     });
 

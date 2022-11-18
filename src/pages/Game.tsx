@@ -15,6 +15,7 @@ import GiveUpModal from "../components/GiveUpModal";
 import MoneyLevel from "../components/MoneyLevel";
 import Question from "../components/Question";
 import Reward from "../components/Reward";
+import SeminaristHelpModal from "../components/SeminaristHelpModal";
 import { SkipButton } from "../components/SkipButton";
 import SkipModal from "../components/SkipModal";
 import TimeoutModal from "../components/TimeoutModal";
@@ -33,6 +34,7 @@ export default function Game() {
   const [giveUp, setGiveUp] = useState(false);
   const [skipState, setSkipState] = useState(false);
   const [audienceHelp, setAudienceHelp] = useState(false);
+  const [seminaristsHelp, setSeminaristsHelp] = useState(false);
 
   const [timer, setTimer] = useState(30);
   const [question, setQuestions] = useState<QuestionInterface | null>(null);
@@ -181,7 +183,7 @@ export default function Game() {
   }
 
   function handleAudienceHelp() {
-    if (!state.helps.audience) return false;
+    if (!state.helps.audience) return;
 
     setAudienceHelp(true);
 
@@ -190,6 +192,20 @@ export default function Game() {
       helps: {
         ...state.helps,
         audience: false,
+      },
+    });
+  }
+
+  function handleSeminaristsHelp() {
+    if (!state.helps.seminarists) return;
+
+    setSeminaristsHelp(true);
+
+    setState({
+      ...state,
+      helps: {
+        ...state.helps,
+        seminarists: false,
       },
     });
   }
@@ -272,12 +288,23 @@ export default function Game() {
                     title="Pedir ajuda das cartas"
                   />
                 </button>
-                <button>
+                <button
+                  className={
+                    !state.helps.seminarists
+                      ? "cursor-not-allowed filter grayscale"
+                      : undefined
+                  }
+                  onClick={handleSeminaristsHelp}
+                >
                   <img
                     src={CollegeStudentsImage}
                     alt="students"
                     className="w-20 h-20"
-                    title="Pedir ajuda aos universitários"
+                    title={
+                      state.helps.audience
+                        ? "Pedir ajuda aos seminaristas"
+                        : "Você já utilizou esta ajuda"
+                    }
                   />
                 </button>
                 <button
@@ -372,6 +399,13 @@ export default function Game() {
         open={audienceHelp}
         onClose={() => setAudienceHelp(false)}
         correctQuestion={question?.answer}
+      />
+
+      <SeminaristHelpModal
+        open={seminaristsHelp}
+        onClose={() => setSeminaristsHelp(false)}
+        correctQuestion={question?.answer}
+        levelQuestion={question?.level}
       />
     </>
   );
