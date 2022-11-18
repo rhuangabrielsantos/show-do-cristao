@@ -9,10 +9,6 @@ module.exports = {
     extend: {
       backgroundImage: {
         paper: "url('/src/assets/background.jpg')",
-        'ballon-green': "url('/src/assets/ballon-green.png')",
-        'ballon-purple-dark': "url('/src/assets/ballon-purple-dark.png')",
-        'ballon-purple-light': "url('/src/assets/ballon-purple-light.png')",
-        'ballon-rose': "url('/src/assets/ballon-rose.png')",
       },
     },
     colors: {

@@ -195,7 +195,11 @@ export default function Game() {
   }
 
   useEffect(() => {
-    setQuestions(getQuestion(state.level, state.questionsAnswered));
+    try {
+      setQuestions(getQuestion(state.level, state.questionsAnswered));
+    } catch (error) {
+      history.push("/");
+    }
 
     handleMoneys();
   }, []);

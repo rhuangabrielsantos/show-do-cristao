@@ -1,6 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React, { Fragment, useEffect, useState } from "react";
 import { VscClose } from "react-icons/vsc";
+import Lottie from "react-lottie";
+
+import audienceAnimationData from "../assets/animations/audience.json";
 
 interface ModalProps {
   open: boolean;
@@ -21,6 +24,15 @@ export default function AudienceHelpModal({
   correctQuestion,
 }: ModalProps) {
   const [percents, setPercents] = useState<PercentsProps>();
+
+  const defaultOptions = {
+    loop: false,
+    autoplay: true,
+    animationData: audienceAnimationData,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid slice",
+    },
+  };
 
   const generatePercent = () => {
     const one =
@@ -96,8 +108,8 @@ export default function AudienceHelpModal({
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all h-96 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-              <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 flex-center w-full h-full">
+            <div className="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all py-11 px-80 sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+              <div className="bg-white flex-center w-full h-full">
                 <button
                   type="button"
                   className="absolute top-5 left-5"
@@ -107,25 +119,38 @@ export default function AudienceHelpModal({
                   <VscClose className="w-10 h-10 text-indigo-400" />
                 </button>
 
-                <div className="flex-center flex-col">
-                  <h1 className="text-indigo-400 text-xl text-center font-acme py-4">
-                    Ajuda do auditório
-                  </h1>
-
-                  <div className="grid grid-cols-2 grid-rows-2 gap-3">
-                    <div className="bg-ballon-rose w-ballon h-ballon font-acme flex-center text-xl">
-                      <h1 className="mb-3">A: {percents?.one}%</h1>
+                <div className="flex-center flex-col gap-5">
+                  <div className="grid grid-cols-4 gap-3">
+                    <div className="flex-center flex-col gap-5 text-xl h-52 w-28 bg-violet-600 rounded-md">
+                      <h1 className="font-acme text-white text-7xl">A</h1>
+                      <h2 className="font-acme text-white">{percents?.one}%</h2>
                     </div>
-                    <div className="bg-ballon-purple-light w-ballon h-ballon font-acme flex-center text-xl">
-                      <h1 className="mb-3">B: {percents?.two}%</h1>
+                    <div className="flex-center flex-col gap-5 text-xl h-52 w-28 bg-pink-600 rounded-md">
+                      <h1 className="font-acme text-white text-7xl">B</h1>
+                      <h2 className="font-acme text-white">{percents?.two}%</h2>
                     </div>
-                    <div className="bg-ballon-purple-dark w-ballon h-ballon font-acme flex-center text-xl">
-                      <h1 className="mb-3">C: {percents?.three}%</h1>
+                    <div className="flex-center flex-col gap-5 text-xl h-52 w-28 bg-rose-600 rounded-md">
+                      <h1 className="font-acme text-white text-7xl">C</h1>
+                      <h2 className="font-acme text-white">
+                        {percents?.three}%
+                      </h2>
                     </div>
-                    <div className="bg-ballon-green w-ballon h-ballon font-acme flex-center text-xl">
-                      <h1 className="mb-3">D: {percents?.four}%</h1>
+                    <div className="flex-center flex-col gap-5 text-xl h-52 w-28 bg-orange-600 rounded-md">
+                      <h1 className="font-acme text-white text-7xl">D</h1>
+                      <h2 className="font-acme text-white">
+                        {percents?.four}%
+                      </h2>
                     </div>
                   </div>
+
+                  <Lottie
+                    options={defaultOptions}
+                    height={100}
+                    width={500}
+                    isStopped={false}
+                    isPaused={false}
+                    isClickToPauseDisabled={true}
+                  />
                 </div>
               </div>
             </div>
