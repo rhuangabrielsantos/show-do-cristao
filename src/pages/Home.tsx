@@ -29,7 +29,9 @@ export default function Home() {
       helps: {
         audience: true,
         seminarists: true,
+        cards: true,
       },
+      hiddenQuestions: [],
     });
 
     history.push("/notice");

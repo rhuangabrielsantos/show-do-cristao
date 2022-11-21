@@ -9,6 +9,7 @@ import CollegeStudentsImage from "../assets/college-students.png";
 import LogoImg from "../assets/logo.png";
 import AudienceHelpModal from "../components/AudienceHelpModal";
 import Button from "../components/Button";
+import CardsHelp from "../components/CardsHelp";
 import CorrectAnswerModal from "../components/CorrectAnswerModal";
 import GameOverModal from "../components/GameOverModal";
 import GiveUpModal from "../components/GiveUpModal";
@@ -35,6 +36,7 @@ export default function Game() {
   const [skipState, setSkipState] = useState(false);
   const [audienceHelp, setAudienceHelp] = useState(false);
   const [seminaristsHelp, setSeminaristsHelp] = useState(false);
+  const [cardsHelp, setCardsHelp] = useState(false);
 
   const [timer, setTimer] = useState(30);
   const [question, setQuestions] = useState<QuestionInterface | null>(null);
@@ -210,6 +212,20 @@ export default function Game() {
     });
   }
 
+  function handleCardsHelp() {
+    if (!state.helps.cards) return;
+
+    setCardsHelp(true);
+
+    setState({
+      ...state,
+      helps: {
+        ...state.helps,
+        cards: false,
+      },
+    });
+  }
+
   useEffect(() => {
     try {
       setQuestions(getQuestion(state.level, state.questionsAnswered));
@@ -223,7 +239,7 @@ export default function Game() {
   useEffect(() => {
     const interval = setInterval(() => {
       if (timer > 0 && !correctAnswerState && !gameOver && !giveUp) {
-        // setTimer(timer - 1);
+        setTimer(timer - 1);
       } else if (!correctAnswerState && !gameOver && !giveUp) {
         setTimeOut(true);
         setState({
@@ -258,29 +274,40 @@ export default function Game() {
                 answer={question?.options[0] || ""}
                 selected={A}
                 onClick={() => handleAlternative("A")}
+                disabled={state.hiddenQuestions.includes("A")}
               />
               <Question
                 alternative="B"
                 answer={question?.options[1] || ""}
                 selected={B}
                 onClick={() => handleAlternative("B")}
+                disabled={state.hiddenQuestions.includes("B")}
               />
               <Question
                 alternative="C"
                 answer={question?.options[2] || ""}
                 selected={C}
                 onClick={() => handleAlternative("C")}
+                disabled={state.hiddenQuestions.includes("C")}
               />
               <Question
                 alternative="D"
                 answer={question?.options[3] || ""}
                 selected={D}
                 onClick={() => handleAlternative("D")}
+                disabled={state.hiddenQuestions.includes("D")}
               />
             </div>
             <div className="flex-center ml-6 bg-rose-400 rounded-md w-72 h-56">
               <div className="grid grid-cols-3 grid-rows-2 gap-3">
-                <button>
+                <button
+                  className={
+                    !state.helps.cards
+                      ? "cursor-not-allowed filter grayscale"
+                      : undefined
+                  }
+                  onClick={handleCardsHelp}
+                >
                   <img
                     src={CardsImage}
                     alt="cards"
@@ -406,6 +433,19 @@ export default function Game() {
         onClose={() => setSeminaristsHelp(false)}
         correctQuestion={question?.answer}
         levelQuestion={question?.level}
+      />
+
+      <SeminaristHelpModal
+        open={seminaristsHelp}
+        onClose={() => setSeminaristsHelp(false)}
+        correctQuestion={question?.answer}
+        levelQuestion={question?.level}
+      />
+
+      <CardsHelp
+        open={cardsHelp}
+        onClose={() => setCardsHelp(false)}
+        correctQuestion={question?.answer}
       />
     </>
   );

@@ -1,4 +1,5 @@
 import React, { createContext, useState } from "react";
+import { AnswerProp } from "../../interfaces/Question";
 
 type GameType = {
   name: string;
@@ -11,11 +12,14 @@ type GameType = {
 
   skips: number;
   helps: HelpsProps;
+
+  hiddenQuestions: AnswerProp[];
 };
 
 type HelpsProps = {
   audience: boolean;
   seminarists: boolean;
+  cards: boolean;
 };
 
 type PropsGameContext = {
@@ -38,7 +42,9 @@ const DEFAULT_GAME: PropsGameContext = {
     helps: {
       audience: true,
       seminarists: true,
+      cards: true,
     },
+    hiddenQuestions: [],
   },
   setState: () => setStateInitial,
 };
