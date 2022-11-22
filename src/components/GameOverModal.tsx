@@ -9,9 +9,10 @@ import GameContext from "../context/game";
 
 interface ModalProps {
   open: boolean;
+  reference?: string;
 }
 
-export default function GameOverModal({ open }: ModalProps) {
+export default function GameOverModal({ open, reference }: ModalProps) {
   const history = useHistory();
   const { state } = useContext(GameContext);
 
@@ -85,7 +86,7 @@ export default function GameOverModal({ open }: ModalProps) {
                     isClickToPauseDisabled={true}
                   />
                   <h1 className="text-rose-600 text-xl text-center font-acme mt-9">
-                    Resposta errada, você perdeu o jogo!
+                    Resposta errada, a resposta certa está em {reference}
                   </h1>
                   <h1 className="text-rose-600 text-xl text-center font-acme">
                     E ganhou um total de {state.moneyEarned} pontos!

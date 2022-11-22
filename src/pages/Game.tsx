@@ -417,7 +417,7 @@ export default function Game() {
       </div>
 
       <TimeoutModal open={timeOut} />
-      <GameOverModal open={gameOver} />
+      <GameOverModal open={gameOver} reference={question?.ref} />
       <CorrectAnswerModal open={correctAnswerState} />
       <GiveUpModal open={giveUp} />
       <SkipModal open={skipState} />
