@@ -4,6 +4,7 @@ export interface Question {
   answer: AnswerProp;
   level: LevelQuestionProp;
   options: string[];
+  ref: string;
 }
 
 export type LevelQuestionProp = "easy" | "medium" | "hard" | "extreme";
