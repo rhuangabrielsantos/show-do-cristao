@@ -262,7 +262,7 @@ export default function Game() {
           <section className="flex-center">
             <img src={LogoImg} alt="logo" className="w-72 mr-7" />
             <div className="flex-center flex-col w-96 h-36 bg-indigo-400 rounded-md">
-              <h1 className="text-cullen text-xl text-center font-acme uppercase">
+              <h1 className="text-cullen text-xl text-center font-acme uppercase px-4">
                 {question?.question}
               </h1>
             </div>
