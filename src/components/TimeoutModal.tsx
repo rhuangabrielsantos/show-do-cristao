@@ -1,11 +1,12 @@
 import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment, useContext } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { VscDebugRestart } from "react-icons/vsc";
 import Lottie from "react-lottie";
 import { useHistory } from "react-router-dom";
 
 import sadAnimationData from "../assets/animations/sad.json";
 import GameContext from "../context/game";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 interface ModalProps {
   open: boolean;
@@ -14,6 +15,11 @@ interface ModalProps {
 export default function TimeoutModal({ open }: ModalProps) {
   const history = useHistory();
   const { state } = useContext(GameContext);
+
+  const [storedValue, setValue] = useLocalStorage({
+    defaultValue: [],
+    key: "ranking",
+  });
 
   const defaultOptions = {
     loop: true,
@@ -25,8 +31,20 @@ export default function TimeoutModal({ open }: ModalProps) {
   };
 
   function handleRedirect() {
-    history.push("/");
+    history.push("/ranking");
   }
+
+  useEffect(() => {
+    if (!open) return;
+
+    setValue([
+      ...storedValue,
+      {
+        name: state.name,
+        money: state.money,
+      },
+    ]);
+  }, [open]);
 
   return (
     <Transition.Root show={open} as={Fragment}>

@@ -8,6 +8,7 @@ import Game from "./pages/Game";
 import Home from "./pages/Home";
 import Infos from "./pages/Infos";
 import Notice from "./pages/Notice";
+import Ranking from "./pages/Ranking";
 import Winner from "./pages/Winner";
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
         <Route path="/game" component={Game} />
         <Route path="/winner" component={Winner} />
         <Route path="/infos" component={Infos} />
+        <Route path="/ranking" component={Ranking} />
       </BrowserRouter>
 
       <ToastContainer

@@ -28,10 +28,12 @@ export function getQuestion(
   return randomQuestion;
 }
 
-export function handleNextMoney(actualMoney: number): MoneyLevel {
+export function handleNextMoney(actualMoney?: number): MoneyLevel | null {
   const nextMoney =
     moneyLevels.findIndex((money: MoneyLevel) => money.amount === actualMoney) -
     1;
 
-  return moneyLevels[nextMoney];
+  return moneyLevels[nextMoney]?.amount === 1000000
+    ? null
+    : moneyLevels[nextMoney];
 }

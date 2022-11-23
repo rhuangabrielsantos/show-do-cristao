@@ -25,7 +25,7 @@ export default function GiveUpModal({ open }: ModalProps) {
   };
 
   function handleRedirect() {
-    history.push("/");
+    history.push("/ranking");
   }
 
   return (

@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { toast } from "react-toastify";
+import { IoPodium } from "react-icons/io5";
 
 import LogoImage from "../assets/logo.png";
 import Footer from "../components/Footer";
@@ -39,6 +40,12 @@ export default function Home() {
 
   return (
     <div className="flex-center flex-col bg-paper w-screen h-screen">
+      <IoPodium
+        className="absolute top-5 right-5 text-rose-600 w-11 h-11 cursor-pointer"
+        onClick={() => history.push("/")}
+        title="Ranking de pontuações"
+      />
+
       <img src={LogoImage} alt="logo" className="w-96" />
 
       <div className="flex-center mt-10">

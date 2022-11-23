@@ -8,7 +8,7 @@ export const moneyLevels = <MoneyLevel[]>[
   },
   {
     money: "500 Mil",
-    level: "hard",
+    level: "extreme",
     amount: 500000,
   },
   {
@@ -33,7 +33,7 @@ export const moneyLevels = <MoneyLevel[]>[
   },
   {
     money: "50 Mil",
-    level: "medium",
+    level: "hard",
     amount: 50000,
   },
   {
@@ -58,7 +58,7 @@ export const moneyLevels = <MoneyLevel[]>[
   },
   {
     money: "5 Mil",
-    level: "easy",
+    level: "medium",
     amount: 5000,
   },
   {

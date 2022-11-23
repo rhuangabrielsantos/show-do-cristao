@@ -26,7 +26,7 @@ export default function GameOverModal({ open, reference }: ModalProps) {
   };
 
   function handleRedirect() {
-    history.push("/");
+    history.push("/ranking");
   }
 
   return (

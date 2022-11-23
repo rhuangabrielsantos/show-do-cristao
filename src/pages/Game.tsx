@@ -22,6 +22,7 @@ import SkipModal from "../components/SkipModal";
 import TimeoutModal from "../components/TimeoutModal";
 import GameContext from "../context/game";
 import { moneyLevels } from "../data/moneyLevels";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 import { Question as QuestionInterface } from "../interfaces/Question";
 import { getQuestion, handleNextMoney } from "../services/GameService";
 
@@ -48,6 +49,11 @@ export default function Game() {
   const [errorMoney, setErrorMoney] = useState("");
   const [stopMoney, setStopMoney] = useState("");
   const [winMoney, setWinMoney] = useState("");
+
+  const [storedValue, setValue] = useLocalStorage({
+    defaultValue: [],
+    key: "ranking",
+  });
 
   const defaultOptions = {
     loop: true,
@@ -118,8 +124,9 @@ export default function Game() {
 
   function handleNextQuestion() {
     const nextMoney = handleNextMoney(state.money);
+    const nextNextMoney = handleNextMoney(nextMoney?.amount);
 
-    if (!nextMoney) {
+    if (!nextNextMoney || !nextMoney) {
       history.push("/winner");
       return;
     }
@@ -127,7 +134,7 @@ export default function Game() {
     setState({
       ...state,
       questionsAnswered: [question?.id || 0, ...state.questionsAnswered],
-      notice: `Vamos para próxima pergunta valendo ${nextMoney.money} pontos!`,
+      notice: `Vamos para próxima pergunta valendo ${nextNextMoney.money} pontos!`,
       money: nextMoney.amount,
       level: nextMoney.level,
     });
@@ -136,18 +143,48 @@ export default function Game() {
 
   function handleEndGame() {
     setGameOver(true);
+
+    const userMoney = state.money;
+    const userMoneyIndex = moneyLevels.findIndex(
+      (money) => money.amount === userMoney
+    );
+    const errorAmount = moneyLevels[userMoneyIndex + 1]?.amount;
+
     setState({
       ...state,
       moneyEarned: errorMoney,
     });
+
+    setValue([
+      ...storedValue,
+      {
+        name: state.name,
+        money: errorAmount,
+      },
+    ]);
   }
 
   function handleGiveUp() {
     setGiveUp(true);
+
+    const userMoney = state.money;
+    const userMoneyIndex = moneyLevels.findIndex(
+      (money) => money.amount === userMoney
+    );
+    const stopAmount = moneyLevels[userMoneyIndex]?.amount;
+
     setState({
       ...state,
       moneyEarned: stopMoney,
     });
+
+    setValue([
+      ...storedValue,
+      {
+        name: state.name,
+        money: stopAmount,
+      },
+    ]);
   }
 
   function handleMoneys() {
