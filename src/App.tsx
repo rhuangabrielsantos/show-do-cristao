@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import GlobalContextProvider from "./context";
 import Game from "./pages/Game";
 import Home from "./pages/Home";
+import Infos from "./pages/Infos";
 import Notice from "./pages/Notice";
 import Winner from "./pages/Winner";
 
@@ -17,6 +18,7 @@ function App() {
         <Route path="/notice" component={Notice} />
         <Route path="/game" component={Game} />
         <Route path="/winner" component={Winner} />
+        <Route path="/infos" component={Infos} />
       </BrowserRouter>
 
       <ToastContainer

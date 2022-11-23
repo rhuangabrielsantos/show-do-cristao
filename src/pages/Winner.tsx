@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 
 import fireworksAnimationData from "../assets/animations/fireworks.json";
 import logoImage from "../assets/logo.png";
-import Footer from "../components/Footer";
 
 export default function Winner() {
   const history = useHistory();
@@ -39,7 +38,6 @@ export default function Winner() {
       <h1 className="text-indigo-400 text-5xl text-center font-acme absolute bottom-10 flex-center">
         Parabéns, você ganhou 1 MILHÃO de pontos!
       </h1>
-      <Footer />
     </div>
   );
 }
