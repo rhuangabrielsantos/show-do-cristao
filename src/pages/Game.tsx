@@ -161,7 +161,7 @@ export default function Game() {
     const errorMoney = moneyLevels[userMoneyIndex + 1]?.money;
     setErrorMoney(errorMoney || "0");
 
-    const winMoney = moneyLevels[userMoneyIndex - 1].money;
+    const winMoney = moneyLevels[userMoneyIndex - 1]?.money;
     setWinMoney(winMoney);
   }
 
@@ -406,13 +406,16 @@ export default function Game() {
         </div>
 
         <div className="flex-center flex-col p-5 bg-cullen bg-opacity-10 rounded-lg shadow-2xl ml-10">
-          {moneyLevels.map((moneyLevel, index) => (
-            <MoneyLevel
-              money={moneyLevel.money}
-              isSet={state.money === moneyLevel.amount}
-              key={index}
-            />
-          ))}
+          {moneyLevels.map(
+            (moneyLevel, index) =>
+              moneyLevel.amount !== 0 && (
+                <MoneyLevel
+                  money={moneyLevel.money}
+                  isSet={state.money === moneyLevel.amount}
+                  key={index}
+                />
+              )
+          )}
         </div>
       </div>
 

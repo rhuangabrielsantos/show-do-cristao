@@ -81,4 +81,9 @@ export const moneyLevels = <MoneyLevel[]>[
     level: "easy",
     amount: 1000,
   },
+  {
+    money: "0",
+    level: "easy",
+    amount: 0,
+  },
 ];

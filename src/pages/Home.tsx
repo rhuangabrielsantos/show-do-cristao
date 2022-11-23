@@ -22,7 +22,7 @@ export default function Home() {
     setState({
       name,
       notice: "O jogo irá iniciar, prepare-se!",
-      money: 1000,
+      money: 0,
       level: "easy",
       questionsAnswered: [],
       skips: 0,
