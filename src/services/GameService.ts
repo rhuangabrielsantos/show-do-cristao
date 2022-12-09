@@ -33,7 +33,5 @@ export function handleNextMoney(actualMoney?: number): MoneyLevel | null {
     moneyLevels.findIndex((money: MoneyLevel) => money.amount === actualMoney) -
     1;
 
-  return moneyLevels[nextMoney]?.amount === 1000000
-    ? null
-    : moneyLevels[nextMoney];
+  return moneyLevels[nextMoney];
 }

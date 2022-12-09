@@ -39,7 +39,7 @@ export default function Game() {
   const [seminaristsHelp, setSeminaristsHelp] = useState(false);
   const [cardsHelp, setCardsHelp] = useState(false);
 
-  const [timer, setTimer] = useState(30);
+  const [timer, setTimer] = useState(60);
   const [question, setQuestions] = useState<QuestionInterface | null>(null);
   const [A, setA] = useState(false);
   const [B, setB] = useState(false);
@@ -126,7 +126,7 @@ export default function Game() {
     const nextMoney = handleNextMoney(state.money);
     const nextNextMoney = handleNextMoney(nextMoney?.amount);
 
-    if (!nextNextMoney || !nextMoney) {
+    if (!nextNextMoney) {
       history.push("/winner");
       return;
     }
@@ -134,9 +134,9 @@ export default function Game() {
     setState({
       ...state,
       questionsAnswered: [question?.id || 0, ...state.questionsAnswered],
-      notice: `Vamos para próxima pergunta valendo ${nextNextMoney.money} pontos!`,
-      money: nextMoney.amount,
-      level: nextMoney.level,
+      notice: `Vamos para próxima pergunta valendo ${nextNextMoney?.money} pontos!`,
+      money: nextMoney?.amount || 0,
+      level: nextMoney?.level || "easy",
     });
     setCorrectAnswerState(true);
   }
@@ -225,6 +225,7 @@ export default function Game() {
     if (!state.helps.audience) return;
 
     setAudienceHelp(true);
+    setTimer(30);
 
     setState({
       ...state,
@@ -239,6 +240,7 @@ export default function Game() {
     if (!state.helps.seminarists) return;
 
     setSeminaristsHelp(true);
+    setTimer(30);
 
     setState({
       ...state,
@@ -253,6 +255,7 @@ export default function Game() {
     if (!state.helps.cards) return;
 
     setCardsHelp(true);
+    setTimer(30);
 
     setState({
       ...state,
@@ -275,9 +278,24 @@ export default function Game() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (timer > 0 && !correctAnswerState && !gameOver && !giveUp) {
+      if (
+        timer > 0 &&
+        !correctAnswerState &&
+        !gameOver &&
+        !giveUp &&
+        !audienceHelp &&
+        !cardsHelp &&
+        !seminaristsHelp
+      ) {
         setTimer(timer - 1);
-      } else if (!correctAnswerState && !gameOver && !giveUp) {
+      } else if (
+        !correctAnswerState &&
+        !gameOver &&
+        !giveUp &&
+        !audienceHelp &&
+        !cardsHelp &&
+        !seminaristsHelp
+      ) {
         setTimeOut(true);
         setState({
           ...state,
@@ -290,7 +308,7 @@ export default function Game() {
     return () => {
       clearInterval(interval);
     };
-  }, [timer]);
+  }, [timer, audienceHelp, cardsHelp, seminaristsHelp]);
 
   return (
     <>

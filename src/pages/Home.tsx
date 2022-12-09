@@ -42,7 +42,7 @@ export default function Home() {
     <div className="flex-center flex-col bg-paper w-screen h-screen">
       <IoPodium
         className="absolute top-5 right-5 text-rose-600 w-11 h-11 cursor-pointer"
-        onClick={() => history.push("/")}
+        onClick={() => history.push("/ranking")}
         title="Ranking de pontuações"
       />
 
