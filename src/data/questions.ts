@@ -374,7 +374,7 @@ export const questions: Question[] = [
   {
     id: 38,
     question: "Quem foi governador do Egito?",
-    answer: "C",
+    answer: "B",
     level: "easy",
     options: ["Moisés", "José", "Ismael", "Esdras"],
     ref: "Gênesis 42:6",
@@ -784,7 +784,7 @@ export const questions: Question[] = [
     answer: "A",
     level: "medium",
     options: ["66", "63", "65", "64"],
-    ref: "",
+    ref: "Bíblia",
   },
   {
     id: 83,
@@ -951,7 +951,7 @@ export const questions: Question[] = [
     answer: "C",
     level: "extreme",
     options: ["Rute", "Ana", "Ester", "Maria"],
-    ref: "",
+    ref: "Ester 1-5",
   },
   {
     id: 103,
@@ -1348,7 +1348,7 @@ export const questions: Question[] = [
     question: "Qual o menor capítulo da Bíblia?",
     answer: "B",
     level: "medium",
-    options: ["Salmos 2", "Salmos 117", "2ª carta de João", "Judas 1"],
+    options: ["Salmos 2", "Salmos 117", "Judas 3", "Judas 1"],
     ref: "Salmos 117",
   },
   {
@@ -1577,7 +1577,7 @@ export const questions: Question[] = [
       "Ouro, prata, bronze, ferro e barro",
       "Ouro, prata, bronze, onix e ferro",
     ],
-    ref: "",
+    ref: "Daniel 2:35",
   },
   {
     id: 169,
