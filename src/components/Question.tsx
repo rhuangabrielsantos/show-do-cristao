@@ -33,7 +33,7 @@ export default function Question({
       <h1 className="text-lg font-acme text-cullen mx-5">{alternative}</h1>
       <h1
         className={`${
-          answer.length > 45 ? "text-sm" : "text-lg"
+          answer.length >= 45 ? "text-sm" : "text-lg"
         } font-acme text-cullen text-left pr-2`}
       >
         {answer}

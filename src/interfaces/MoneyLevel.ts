@@ -1,5 +1,7 @@
+import { LevelQuestionProp } from "./Question";
+
 export interface MoneyLevel {
   money: string;
-  level: string;
+  level: LevelQuestionProp;
   amount: number;
 }

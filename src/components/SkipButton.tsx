@@ -14,12 +14,6 @@ export const SkipButton: React.FC<SkipButtonProps> = ({
   color,
 }) => {
   return disabled ? (
-    <button onClick={handleSkip}>
-      <div className={`flex-center bg-${color}-200 w-20 h-20 rounded-md`}>
-        <img src={SkipImage} alt="skip" className="w-14 h-14" title="Pular" />
-      </div>
-    </button>
-  ) : (
     <button className="cursor-not-allowed filter grayscale">
       <div className="flex-center bg-gray-200 w-20 h-20 rounded-md">
         <img
@@ -28,6 +22,12 @@ export const SkipButton: React.FC<SkipButtonProps> = ({
           className="w-14 h-14"
           title="Já utilizado"
         />
+      </div>
+    </button>
+  ) : (
+    <button onClick={handleSkip}>
+      <div className={`flex-center bg-${color}-200 w-20 h-20 rounded-md`}>
+        <img src={SkipImage} alt="skip" className="w-14 h-14" title="Pular" />
       </div>
     </button>
   );

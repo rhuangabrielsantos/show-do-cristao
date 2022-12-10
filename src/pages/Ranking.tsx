@@ -32,7 +32,7 @@ export default function Ranking() {
         </h1>
 
         {storedValue
-          .sort((a: RankingUser, b: RankingUser) => a.money < b.money)
+          .sort((a: RankingUser, b: RankingUser) => b.money - a.money)
           .map(
             (user: RankingUser, index: number) =>
               index <= 9 && (

@@ -1,5 +1,5 @@
 import React, { createContext, useState } from "react";
-import { AnswerProp } from "../../interfaces/Question";
+import { AnswerProp, LevelQuestionProp } from "../../interfaces/Question";
 
 type GameType = {
   name: string;
@@ -7,7 +7,7 @@ type GameType = {
   moneyEarned?: string;
 
   notice: string;
-  level: string;
+  level: LevelQuestionProp;
   questionsAnswered: number[];
 
   skips: number;
@@ -36,7 +36,7 @@ const DEFAULT_GAME: PropsGameContext = {
     name: "",
     money: 1000,
     notice: "",
-    level: "",
+    level: "easy",
     questionsAnswered: [],
     skips: 0,
     helps: {

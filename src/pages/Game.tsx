@@ -30,6 +30,26 @@ export default function Game() {
   const history = useHistory();
   const { state, setState } = useContext(GameContext);
 
+  const [easyLevels, setEasyLevels] = useLocalStorage({
+    defaultValue: [],
+    key: "easy_levels",
+  });
+
+  const [mediumLevels, setMediumLevels] = useLocalStorage({
+    defaultValue: [],
+    key: "medium_levels",
+  });
+
+  const [hardLevels, setHardLevels] = useLocalStorage({
+    defaultValue: [],
+    key: "hard_levels",
+  });
+
+  const [extremeLevels, setextremeLevels] = useLocalStorage({
+    defaultValue: [],
+    key: "extreme_levels",
+  });
+
   const [timeOut, setTimeOut] = useState(false);
   const [correctAnswerState, setCorrectAnswerState] = useState(false);
   const [gameOver, setGameOver] = useState(false);
@@ -131,6 +151,30 @@ export default function Game() {
       return;
     }
 
+    const handleSaveQuestions = {
+      easy: {
+        state: easyLevels,
+        function: setEasyLevels,
+      },
+      medium: {
+        state: mediumLevels,
+        function: setMediumLevels,
+      },
+      hard: {
+        state: hardLevels,
+        function: setHardLevels,
+      },
+      extreme: {
+        state: extremeLevels,
+        function: setextremeLevels,
+      },
+    };
+
+    handleSaveQuestions[question?.level || "easy"].function([
+      question?.id || 0,
+      ...handleSaveQuestions[question?.level || "easy"].state,
+    ]);
+
     setState({
       ...state,
       questionsAnswered: [question?.id || 0, ...state.questionsAnswered],
@@ -148,7 +192,9 @@ export default function Game() {
     const userMoneyIndex = moneyLevels.findIndex(
       (money) => money.amount === userMoney
     );
-    const errorAmount = moneyLevels[userMoneyIndex + 1]?.amount;
+    const errorAmount = moneyLevels[userMoneyIndex + 1]
+      ? moneyLevels[userMoneyIndex + 1].amount
+      : 0;
 
     setState({
       ...state,
@@ -203,7 +249,7 @@ export default function Game() {
   }
 
   function handleSkip() {
-    if (state.skips === 3) return;
+    if (state.skips === 3 || question?.level === "extreme") return;
 
     setGameOver(true);
 
@@ -222,10 +268,10 @@ export default function Game() {
   }
 
   function handleAudienceHelp() {
-    if (!state.helps.audience) return;
+    if (!state.helps.audience || question?.level === "extreme") return;
 
     setAudienceHelp(true);
-    setTimer(30);
+    setTimer((state) => (state > 30 ? state : 30));
 
     setState({
       ...state,
@@ -237,10 +283,10 @@ export default function Game() {
   }
 
   function handleSeminaristsHelp() {
-    if (!state.helps.seminarists) return;
+    if (!state.helps.seminarists || question?.level === "extreme") return;
 
     setSeminaristsHelp(true);
-    setTimer(30);
+    setTimer((state) => (state > 30 ? state : 30));
 
     setState({
       ...state,
@@ -252,10 +298,10 @@ export default function Game() {
   }
 
   function handleCardsHelp() {
-    if (!state.helps.cards) return;
+    if (!state.helps.cards || question?.level === "extreme") return;
 
     setCardsHelp(true);
-    setTimer(30);
+    setTimer((state) => (state > 30 ? state : 30));
 
     setState({
       ...state,
@@ -268,7 +314,28 @@ export default function Game() {
 
   useEffect(() => {
     try {
-      setQuestions(getQuestion(state.level, state.questionsAnswered));
+      setQuestions(
+        getQuestion(
+          state.level,
+          state.questionsAnswered,
+          {
+            state: easyLevels,
+            function: setEasyLevels,
+          },
+          {
+            state: mediumLevels,
+            function: setMediumLevels,
+          },
+          {
+            state: hardLevels,
+            function: setHardLevels,
+          },
+          {
+            state: extremeLevels,
+            function: setextremeLevels,
+          }
+        )
+      );
     } catch (error) {
       history.push("/");
     }
@@ -309,6 +376,10 @@ export default function Game() {
       clearInterval(interval);
     };
   }, [timer, audienceHelp, cardsHelp, seminaristsHelp]);
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
 
   return (
     <>
@@ -357,7 +428,7 @@ export default function Game() {
               <div className="grid grid-cols-3 grid-rows-2 gap-3">
                 <button
                   className={
-                    !state.helps.cards
+                    !state.helps.cards || question?.level === "extreme"
                       ? "cursor-not-allowed filter grayscale"
                       : undefined
                   }
@@ -372,7 +443,7 @@ export default function Game() {
                 </button>
                 <button
                   className={
-                    !state.helps.seminarists
+                    !state.helps.seminarists || question?.level === "extreme"
                       ? "cursor-not-allowed filter grayscale"
                       : undefined
                   }
@@ -393,7 +464,7 @@ export default function Game() {
                   onClick={handleAudienceHelp}
                   disabled={!state.helps.audience}
                   className={
-                    !state.helps.audience
+                    !state.helps.audience || question?.level === "extreme"
                       ? "cursor-not-allowed filter grayscale"
                       : undefined
                   }
@@ -411,19 +482,19 @@ export default function Game() {
                 </button>
 
                 <SkipButton
-                  disabled={state.skips <= 0}
+                  disabled={state.skips >= 1 || question?.level === "extreme"}
                   handleSkip={handleSkip}
                   color="rose"
                 />
 
                 <SkipButton
-                  disabled={state.skips <= 1}
+                  disabled={state.skips >= 2 || question?.level === "extreme"}
                   handleSkip={handleSkip}
                   color="fuchsia"
                 />
 
                 <SkipButton
-                  disabled={state.skips <= 2}
+                  disabled={state.skips >= 3 || question?.level === "extreme"}
                   handleSkip={handleSkip}
                   color="purple"
                 />
