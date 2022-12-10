@@ -377,10 +377,6 @@ export default function Game() {
     };
   }, [timer, audienceHelp, cardsHelp, seminaristsHelp]);
 
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
-
   return (
     <>
       <div className="flex-center bg-paper w-screen h-screen">
