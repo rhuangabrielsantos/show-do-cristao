@@ -181,6 +181,7 @@ export default function Game() {
       notice: `Vamos para próxima pergunta valendo ${nextNextMoney?.money} pontos!`,
       money: nextMoney?.amount || 0,
       level: nextMoney?.level || "easy",
+      hiddenQuestions: [],
     });
     setCorrectAnswerState(true);
   }
@@ -199,6 +200,7 @@ export default function Game() {
     setState({
       ...state,
       moneyEarned: errorMoney,
+      hiddenQuestions: [],
     });
 
     setValue([
@@ -222,6 +224,7 @@ export default function Game() {
     setState({
       ...state,
       moneyEarned: stopMoney,
+      hiddenQuestions: [],
     });
 
     setValue([
@@ -262,6 +265,7 @@ export default function Game() {
       questionsAnswered: [question?.id || 0, ...state.questionsAnswered],
       notice: `Vamos para uma nova pergunta valendo ${formattedMoney} pontos!`,
       skips: state.skips + 1,
+      hiddenQuestions: [],
     });
 
     setSkipState(true);
@@ -279,6 +283,7 @@ export default function Game() {
         ...state.helps,
         audience: false,
       },
+      hiddenQuestions: [],
     });
   }
 
@@ -294,6 +299,7 @@ export default function Game() {
         ...state.helps,
         seminarists: false,
       },
+      hiddenQuestions: [],
     });
   }
 
@@ -309,6 +315,7 @@ export default function Game() {
         ...state.helps,
         cards: false,
       },
+      hiddenQuestions: [],
     });
   }
 
@@ -367,6 +374,7 @@ export default function Game() {
         setState({
           ...state,
           moneyEarned: errorMoney,
+          hiddenQuestions: [],
         });
         clearInterval(interval);
       }
