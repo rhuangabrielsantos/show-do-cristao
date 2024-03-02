@@ -1689,10 +1689,10 @@ export const questions: Question[] = [
   {
     id: 180,
     question: "Qual é o versículo mais extenso da Bíblia?",
-    answer: "C",
+    answer: "D",
     level: "medium",
     options: ["Salmos 119:57", "Salmos 119:43", "Isaías 24:2", "Ester 8:9"],
-    ref: "Ester 8:9",
+    ref: "--",
   },
   {
     id: 181,
