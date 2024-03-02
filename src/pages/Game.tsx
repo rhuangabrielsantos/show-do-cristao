@@ -391,10 +391,17 @@ export default function Game() {
         <div>
           <section className="flex-center">
             <img src={LogoImg} alt="logo" className="w-72 mr-7" />
-            <div className="flex-center flex-col w-96 h-36 bg-indigo-400 rounded-md">
-              <h1 className="text-cullen text-xl text-center font-acme uppercase px-4">
-                {question?.question}
-              </h1>
+            <div className="flex-center flex-col">
+              <div className="flex-center flex-col w-96 h-36 bg-indigo-400 rounded-t-md">
+                <h1 className="text-cullen text-xl text-center font-acme uppercase px-4">
+                  {question?.question}
+                </h1>
+              </div>
+              <div className="flex-center flex-col w-96 p-4 bg-indigo-400 rounded-b-md">
+                <h2 className="text-cullen text-md text-center font-acme uppercase px-4">
+                  Referência na bíblia: <br /> {question?.ref}
+                </h2>
+              </div>
             </div>
           </section>
           <section className="flex-center mt-5">

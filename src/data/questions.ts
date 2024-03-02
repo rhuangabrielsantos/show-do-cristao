@@ -465,7 +465,7 @@ export const questions: Question[] = [
       "Apocalipse 16",
       "Apocalipse 21",
     ],
-    ref: "Apocalipse 22",
+    ref: "--",
   },
   {
     id: 48,
@@ -489,7 +489,7 @@ export const questions: Question[] = [
     answer: "C",
     level: "medium",
     options: ["Salomão", "Saul", "Davi", "Daniel"],
-    ref: "A autoria é atribuída a Davi",
+    ref: "--",
   },
   {
     id: 51,
@@ -864,7 +864,7 @@ export const questions: Question[] = [
     answer: "C",
     level: "hard",
     options: ["Zacarias", "Elias", "Jeremias", "Salomão"],
-    ref: "A autoria é atribuída à Jeremias",
+    ref: "--",
   },
   {
     id: 93,
@@ -919,7 +919,7 @@ export const questions: Question[] = [
     answer: "A",
     level: "hard",
     options: ["Paulo", "João", "Pedro", "Lucas"],
-    ref: "É atribuído a Paulo a autoria de aproximadamente 13 livros",
+    ref: "--",
   },
   {
     id: 99,
@@ -935,7 +935,7 @@ export const questions: Question[] = [
     answer: "A",
     level: "hard",
     options: ["Obadias", "Amós", "Joel", "Habacuque"],
-    ref: "Obadias tem apenas um capítulo",
+    ref: "--",
   },
   {
     id: 101,
@@ -998,7 +998,7 @@ export const questions: Question[] = [
       "os 5 ultimos livros do Velho Testamento",
       "os 5 primeiros livros do Velho Testamento",
     ],
-    ref: "os 5 primeiros livros do Velho Testamento",
+    ref: "--",
   },
   {
     id: 107,
@@ -1332,7 +1332,7 @@ export const questions: Question[] = [
       "Hebreus e Apocalipse",
       "Mateus e Lucas",
     ],
-    ref: "Mateus 1 e Lucas 2",
+    ref: "--",
   },
   {
     id: 142,
@@ -1407,7 +1407,7 @@ export const questions: Question[] = [
     answer: "B",
     level: "hard",
     options: ["Sofonias", "Filemom", "Habacuque", "Naum"],
-    ref: "Filemom",
+    ref: "--",
   },
   {
     id: 151,
@@ -1420,7 +1420,7 @@ export const questions: Question[] = [
       "Oséias e Eclesiastes",
       "Ageu e Eclesiastes",
     ],
-    ref: "Ester e Cânticos",
+    ref: "--",
   },
   {
     id: 152,
@@ -1428,7 +1428,7 @@ export const questions: Question[] = [
     answer: "B",
     level: "hard",
     options: ["Judas", "II João", "I João", "III João"],
-    ref: "1 capítulo e 13 versículos",
+    ref: "--",
   },
   {
     id: 153,
@@ -1563,7 +1563,7 @@ export const questions: Question[] = [
     answer: "D",
     level: "medium",
     options: ["1", "4", "2", "3"],
-    ref: "Naum 3",
+    ref: "--",
   },
   {
     id: 168,
@@ -1668,7 +1668,7 @@ export const questions: Question[] = [
       "Evangelho de João",
       "Atos dos Apóstolos",
     ],
-    ref: "Atos dos Apóstolos",
+    ref: "--",
   },
   {
     id: 178,
